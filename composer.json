@@ -1,0 +1,12 @@
+{
+    "name": "craigmason/doctrine-sqlserver-extensions",
+    "description": "SQL Server specific extensions for Doctrine to make life easier",
+    "keywords": ["dbal", "database", "sqlserver"],
+    "require": {
+        "php": ">=5.3.2",
+        "doctrine/orm": "2.3.*"
+    },
+    "autoload": {
+        "psr-0": { "DoctrineSqlServerExtensions": "lib/" }
+    }
+}
