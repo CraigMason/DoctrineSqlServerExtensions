@@ -164,7 +164,7 @@ class SQLServerSqlWalker extends SqlWalker
         // For every identifier, find out the SQL alias by combing through the ResultSetMapping
         $sqlIdentifier = array();
         foreach ($rootIdentifiers as $property) {
-            $sqlIdentifier[$property] = $this->getSQLTableAlias($rootClass->getTableName(), $rootAlias) . '.' . $property;
+            $sqlIdentifier[$property] = $this->getSQLTableAlias($rootClass->getTableName(), $rootAlias) . '.' . $rootClass->fieldMappings[$property]['columnName'];
         }
 
         return $sqlIdentifier;
