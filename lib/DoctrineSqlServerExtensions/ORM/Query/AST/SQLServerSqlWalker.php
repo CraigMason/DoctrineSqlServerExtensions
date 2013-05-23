@@ -84,6 +84,7 @@ class SQLServerSqlWalker extends SqlWalker
         $select = $this->walkSelectClause($AST->selectClause);
         $from   = $this->walkFromClause($AST->fromClause);
         $where  = $this->walkWhereClause($AST->whereClause);
+	$orderBy = null;
 
         // Prepare the orderby as we may need to shift it about
         if($AST->orderByClause !== null)
