@@ -61,10 +61,11 @@ class Paginator extends BasePaginator implements \Countable, \IteratorAggregate
             $whereInQuery->setHint(Query::HINT_CUSTOM_TREE_WALKERS, array('Doctrine\ORM\Tools\Pagination\WhereInWalker'));
             $whereInQuery->setHint(WhereInWalker::HINT_PAGINATOR_ID_COUNT, count($ids));
             $whereInQuery->setFirstResult(null)->setMaxResults(null);
-            foreach ($ids as $i => $id) {
-                $i++;
-                $whereInQuery->setParameter("{$namespace}_{$i}", $id);
-            }
+            //foreach ($ids as $i => $id) {
+            //    $i++;
+            //    $whereInQuery->setParameter("{$namespace}_{$i}", $id);
+            //}
+            $whereInQuery->setParameter("{$namespace}", $ids);
             $hm = $query->getHydrationMode();
             $result = $whereInQuery->getResult($hm);
 
