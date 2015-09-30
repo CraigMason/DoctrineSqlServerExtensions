@@ -3,6 +3,7 @@
 namespace DoctrineSqlServerExtensions\ORM\Tools\SQLServer\Pagination;
 
 use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator as BasePaginator;
 use Doctrine\ORM\Tools\Pagination\WhereInWalker;
 
