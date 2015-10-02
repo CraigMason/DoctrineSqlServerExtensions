@@ -93,7 +93,7 @@ class Paginator extends BasePaginator implements \Countable, \IteratorAggregate
             //    $i++;
             //    $whereInQuery->setParameter("{$namespace}_{$i}", $id);
             //}
-            $whereInQuery->setParameter("{$namespace}", $ids);
+            $whereInQuery->setParameter($namespace, $ids);
             $hm = $query->getHydrationMode();
             $result = $whereInQuery->getResult($hm);
 
