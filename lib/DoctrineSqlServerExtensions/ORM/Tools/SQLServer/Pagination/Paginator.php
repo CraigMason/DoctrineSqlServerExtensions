@@ -48,7 +48,34 @@ class Paginator extends BasePaginator implements \Countable, \IteratorAggregate
             $subQuery->setHint(Query::HINT_CUSTOM_TREE_WALKERS, array('DoctrineSqlServerExtensions\ORM\Tools\SQLServer\Pagination\LimitSubqueryWalker'));
             $subQuery->setFirstResult($offset);
             $subQuery->setMaxResults($length);
-            $ids = array_map('current', $subQuery->getScalarResult());
+            //$ids = array_map('current', $subQuery->getScalarResult());
+            
+            $keyIdentifier = false;
+            $ids = array();
+            foreach ($subQuery->getScalarResult() as $scalarResult) {
+                if (!$keyIdentifier) {
+                    if (array_key_exists('q_id', $scalarResult)) {
+                        $keyIdentifier = 'q_id';
+                    } else {
+                        foreach (array_keys($scalarResult) as $key) {
+                            if ('_id' == substr($key, 1)) {
+                                $keyIdentifier = $key;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if ($keyIdentifier) {
+                    $ids[] = $scalarResult[$keyIdentifier];
+                } else {
+                    // No key matching found.
+                    // What should we do???
+                    // To see that situation, we can look for a IN(-1)
+                    // request... 
+                    $ids[] = -1;
+                }
+            }
+            $ids = array_unique($ids);
 
             // don't do this for an empty id array
             if (count($ids) == 0) {
